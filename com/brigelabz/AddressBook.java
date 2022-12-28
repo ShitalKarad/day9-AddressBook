@@ -78,4 +78,16 @@ public class AddressBook {
             }
         }
     }
+
+    public void deleteContact() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter first name:");
+        String name = sc.next();
+        for (Contact contactPerson : contactList) {
+            if (name.equals(contactPerson.getName())) {
+                contactList.remove(contactPerson);
+                break;
+            }
+        }
+    }
 }
