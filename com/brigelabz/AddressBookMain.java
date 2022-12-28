@@ -6,6 +6,8 @@ public class AddressBookMain {
         AddressBook familyBook = new AddressBook();
         familyBook.addContact();
         System.out.println(familyBook);
+        familyBook.editContact();
+        System.out.println(familyBook);
 
     }
 
