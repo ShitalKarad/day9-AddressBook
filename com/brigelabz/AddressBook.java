@@ -1,38 +1,50 @@
 package com.brigelabz;
-
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class AddressBook {
-    ArrayList<Contact> contactList = new ArrayList<>();
+    static ArrayList<Contact> contactList = new ArrayList<>();
+    static HashMap<String, AddressBook> addressBookMap = new HashMap<>();
+    Scanner sc = new Scanner(System.in);
 
-    public void addContact() {
+    public ArrayList addContact(ArrayList<Contact> contactList1) {
         Contact contactPerson = new Contact();
+
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter the details of contact person");
         System.out.print("Enter first name:");
-        contactPerson.setName(sc.next());
-        System.out.print("Enter Last name:");
-        contactPerson.setSurName(sc.next());
-        System.out.print("Enter the Address : ");
-        contactPerson.setAddress(sc.next());
-        System.out.print("Enter the City : ");
-        contactPerson.setCity(sc.next());
-        System.out.print("Enter the State : ");
-        System.out.println();
-        contactPerson.setState(sc.next());
-        System.out.print("Enter the ZipCode : ");
-        contactPerson.setZip(sc.next());
-        System.out.print("Enter the Mobile no : ");
-        contactPerson.setContactNumber(sc.next());
-        contactList.add(contactPerson);
+        String name = (sc.next());
+        if (findDuplicates(name) == true) {
+            System.out.println("This Name is already present in your dictionary. please add Another name \n");
+        } else {
+            contactPerson.setName(name);
+            System.out.print("Enter Last name:");
+            contactPerson.setSurName(sc.next());
+            System.out.print("Enter the Address : ");
+            contactPerson.setAddress(sc.next());
+            System.out.print("Enter the City : ");
+            contactPerson.setCity(sc.next());
+            System.out.print("Enter the State : ");
+            contactPerson.setState(sc.next());
+            System.out.print("Enter the ZipCode : ");
+            contactPerson.setZip(sc.next());
+            System.out.print("Enter the Mobile no : ");
+            contactPerson.setContactNumber(sc.next());
+
+            contactList.add(contactPerson);
+            contactList1.add(contactPerson);
+        }
+        return contactList1;
+    }
+    private static boolean findDuplicates(String name) {
+
+        return contactList.stream().anyMatch(contact ->contact.getName().equals(name));
     }
 
     @Override
     public String toString() {
-        return "AddressBook{" +
-                "contactList=" + contactList +
-                '}';
+        return "AddressBook{" + "contactList=" + contactList + '}';
     }
 
     public void editContact() {
@@ -42,8 +54,8 @@ public class AddressBook {
         for (Contact contactPerson : contactList) {
             if (name.equals(contactPerson.getName())) {
                 System.out.println("What you want to edit for the contact");
-                System.out.println("1.First Name\n2.Last Name\n3.Address\n4.City\n5.State\n6.Zip Code\n7." +
-                        "Mobile Number\n8.Email id");
+                System.out.println("1.First Name\n2.Last Name\n3.Address\n4.City\n5.State\n6.Zip Code\n7."
+                        + "Mobile Number\n8.Email id");
                 int choice = sc.nextInt();
                 switch (choice) {
                     case 1:
@@ -90,4 +102,25 @@ public class AddressBook {
             }
         }
     }
+
+    public void addAddressBookMap(AddressBook ad) {
+        System.out.println("Enter your Addres Book name ");
+        String name = sc.nextLine();
+        addressBookMap.put(name, ad);
+    }
+
+    public void displayMyAddressBook(ArrayList<Contact> arrayList) {
+        System.out.println("My Address Books");
+        System.out.println(addressBookMap.keySet());
+        for (Contact key : arrayList) {
+            System.out.println(key);
+        }
+    }
+
+    public ArrayList crateNewAddressBook() {
+        ArrayList addressBookName = new ArrayList();
+        return addressBookName;
+    }
+
+
 }
