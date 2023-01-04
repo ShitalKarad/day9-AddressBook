@@ -1,8 +1,7 @@
 package com.brigelabz;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class AddressBookMain {
     static HashMap<String,AddressBook> addressBookMap=new HashMap<>();
@@ -10,17 +9,18 @@ public class AddressBookMain {
     public static void main(String[] args) {
         AddressBook familyBook = new AddressBook();
         System.out.println("Welcome in AddressBook system");
-        System.out.println("WelCome To AddressBook Program");
         Scanner scanner = new Scanner(System.in);
         int operation;
         do {
             System.out.println("1. ADD CONTACT " +
-                    "\n2. DISPLAY CONTACT " +
-                    "\n3 EDIT " +
-                    "\n4 Delete " +
-                    "\n5 Display Address Books " +
-                    "\n6 New Address Book" +
-                    "\n7. EXIT ");
+                    "\n2. DISPLAY All  AddressBooks  " +
+                    "\n3 Search information of addressBook  " +
+                    "\n4 delete contact in Address Books " +
+                    "\n5 Display  Address Book"+
+                    "\n6 Add new Address Book"+
+                    "\n7. EXIT " );
+
+
             System.out.println("Enter the Operation Number");
             operation = scanner.nextInt();
             switch (operation) {
@@ -31,7 +31,6 @@ public class AddressBookMain {
                         System.out.println("Enter a address book Name");
                         String name3 = scanner.nextLine();
                         addressBookNames.put(name3,familyBook.crateNewAddressBook());
-
                     }
                     System.out.println("your Address Book Names");
                     for (String addressBookName : addressBookNames.keySet()){
@@ -42,10 +41,12 @@ public class AddressBookMain {
                     addressBookNames.put(name,familyBook.addContact(addressBookNames.get(name)));
                     break;
                 case 2:
-                    System.out.println(familyBook);
+                    for (Map.Entry<String, AddressBook> set : addressBookMap.entrySet()) {
+                        System.out.println(set.getKey() + "=" + set.getValue());
+                    }
                     break;
                 case 3:
-                    familyBook.editContact();
+                    familyBook.searchPerson(addressBookNames);
                     break;
                 case 4:
                     String addressBook = scanner.nextLine();
