@@ -121,8 +121,10 @@ public class AddressBook {
         do {
             System.out.println("1.Search in city");
             System.out.println("2.Search in state");
-            System.out.println("3.Search by peson name");
-            System.out.println("4.Exit");
+            System.out.println("3.Search by person name");
+            System.out.println("4.count number of person by city ");
+            System.out.println("5.count number of person by state ");
+            System.out.println("6.Exit");
             System.out.println();
             System.out.print("Enter option : ");
             Scanner input = new Scanner(System.in);
@@ -154,22 +156,44 @@ public class AddressBook {
                     break;
                 case 3:
                     Scanner scanner2 = new Scanner(System.in);
-                    System.out.println("Enter State ! ");
-                    String firstName = scanner2.nextLine();
+                    System.out.println("Enter name ! ");
+                    String personName = scanner2.nextLine();
                     System.out.println("using this name and  below records are found ");
                     for (String addressBookName : addressBookNames.keySet()) {
                         System.out.println(addressBookName);
                         ArrayList<Contact> contact2 = addressBookNames.get(addressBookName);
-                        contact2.stream().filter(state -> state.getName().equalsIgnoreCase(firstName))
+                        contact2.stream().filter(name -> name.getName().equalsIgnoreCase(personName))
                                 .forEach(x -> System.out.println(x));
                     }
                     break;
                 case 4:
+                    System.out.println("Enter Person city name to count person : ");
+                    String giveName = input.next();
+                    for (String addressBookName : addressBookNames.keySet()) {
+                        System.out.println(addressBookName);
+                        ArrayList<Contact> contact3 = addressBookNames.get(addressBookName);
+                        long countPerson = contact3.stream().filter(city -> city.getCity().equalsIgnoreCase
+                                (giveName)).count();
+                        System.out.println(countPerson);
+                    }
+                    break;
+                case 5:
+                    System.out.println("Enter Person state name to count person : ");
+                    String countByState = input.next();
+                    for (String addressBookName : addressBookNames.keySet()) {
+                        System.out.println(addressBookName);
+                        ArrayList<Contact> contact = addressBookNames.get(addressBookName);
+                        long countPerson = contact.stream().filter(state -> state.getState().equalsIgnoreCase
+                                (countByState)).count();
+                        System.out.println(countPerson);
+                    }
+                    break;
+                case 6:
                     System.out.println("Exist");
                     break;
 
             }
         }
-        while (operation != 4) ;
+        while (operation != 5) ;
     }
 }
