@@ -1,8 +1,7 @@
 package com.brigelabz;
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class AddressBook {
     static ArrayList<Contact> contactList = new ArrayList<>();
@@ -124,7 +123,9 @@ public class AddressBook {
             System.out.println("3.Search by person name");
             System.out.println("4.count number of person by city ");
             System.out.println("5.count number of person by state ");
-            System.out.println("6.Exit");
+            System.out.println("6.Sort the contact by using person name");
+            System.out.println("7.Sort the contact by using person state name");
+            System.out.println("8.Exit");
             System.out.println();
             System.out.print("Enter option : ");
             Scanner input = new Scanner(System.in);
@@ -168,32 +169,63 @@ public class AddressBook {
                     break;
                 case 4:
                     System.out.println("Enter Person city name to count person : ");
-                    String giveName = input.next();
+                    Scanner scan= new Scanner(System.in);
+                    System.out.println("Enter city name ! ");
+                    String countCity = scan.nextLine();
+                   // String giveName = input.next();
                     for (String addressBookName : addressBookNames.keySet()) {
                         System.out.println(addressBookName);
                         ArrayList<Contact> contact3 = addressBookNames.get(addressBookName);
                         long countPerson = contact3.stream().filter(city -> city.getCity().equalsIgnoreCase
-                                (giveName)).count();
+                                (countCity)).count();
                         System.out.println(countPerson);
                     }
                     break;
                 case 5:
-                    System.out.println("Enter Person state name to count person : ");
-                    String countByState = input.next();
+                    Scanner sc = new Scanner(System.in);
+                    System.out.println("Enter State name ! ");
+                    String countState= sc.nextLine();
                     for (String addressBookName : addressBookNames.keySet()) {
                         System.out.println(addressBookName);
                         ArrayList<Contact> contact = addressBookNames.get(addressBookName);
                         long countPerson = contact.stream().filter(state -> state.getState().equalsIgnoreCase
-                                (countByState)).count();
-                        System.out.println(countPerson);
+                                (countState)).count();
+                        System.out.println(countState + " In this city " + countPerson + " record found");
                     }
                     break;
                 case 6:
+                    System.out.println("Sort the contact by using person name");
+                    Scanner scann = new Scanner(System.in);
+                    System.out.println("Enter person name ! ");
+                    String sortName = scann.nextLine();
+                   // String name = input.next();
+                    List<Contact>   personList1 = null;
+                    for (String addressBook : addressBookNames.keySet()) {
+                         personList1 = contactList.stream().sorted(Comparator.comparing
+                                (Contact::getName))
+                                .collect(Collectors.toList());
+                    }
+                    System.out.println(personList1);
+                    break;
+                case 7:
+                    System.out.println("Sort the contact by using state name");
+                    Scanner scanne = new Scanner(System.in);
+                    System.out.println("Enter State ! ");
+                    String sortStateName = scanne.nextLine();
+                    List<Contact>   personList2 = null;
+                    for (String addressBook : addressBookMap.keySet()) {
+                        personList1 = contactList.stream().sorted(Comparator.comparing
+                                (Contact::getState))
+                                .collect(Collectors.toList());
+                    }
+                    System.out.println(personList2);
+                    break;
+                case 8:
                     System.out.println("Exist");
                     break;
 
             }
         }
-        while (operation != 5) ;
+        while (operation != 8) ;
     }
 }
