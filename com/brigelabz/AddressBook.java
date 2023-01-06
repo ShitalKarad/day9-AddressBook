@@ -125,7 +125,9 @@ public class AddressBook {
             System.out.println("5.count number of person by state ");
             System.out.println("6.Sort the contact by using person name");
             System.out.println("7.Sort the contact by using person state name");
-            System.out.println("8.Exit");
+            System.out.println("8.Sort the contact by using person city name");
+            System.out.println("9.Sort the contact by using person zip name");
+            System.out.println("10.Exit");
             System.out.println();
             System.out.print("Enter option : ");
             Scanner input = new Scanner(System.in);
@@ -214,18 +216,46 @@ public class AddressBook {
                     String sortStateName = scanne.nextLine();
                     List<Contact>   personList2 = null;
                     for (String addressBook : addressBookMap.keySet()) {
-                        personList1 = contactList.stream().sorted(Comparator.comparing
+                        personList2 = contactList.stream().sorted(Comparator.comparing
                                 (Contact::getState))
                                 .collect(Collectors.toList());
                     }
                     System.out.println(personList2);
                     break;
                 case 8:
+                    System.out.println("Sort the contact by using city name");
+                    Scanner scanner3 = new Scanner(System.in);
+                    System.out.println("Enter city ! ");
+                    String sortCity = scanner3.nextLine();
+                    // String name = input.next();
+                    List<Contact>   personList3 = null;
+                    for (String addressBook : addressBookNames.keySet()) {
+                        personList3 = contactList.stream().sorted(Comparator.comparing
+                                (Contact::getCity))
+                                .collect(Collectors.toList());
+                    }
+                    System.out.println(personList3);
+                    break;
+                case 9:
+                    System.out.println("Sort the contact by using Zip name");
+                    Scanner scanner4 = new Scanner(System.in);
+                    System.out.println("Enter zip ! ");
+                    String sortZip = scanner4.nextLine();
+                    // String name = input.next();
+                    List<Contact>   personList4 = null;
+                    for (String addressBook : addressBookNames.keySet()) {
+                        personList4 = contactList.stream().sorted(Comparator.comparing
+                                (Contact::getZip))
+                                .collect(Collectors.toList());
+                    }
+                    System.out.println(personList4);
+                    break;
+                case 10:
                     System.out.println("Exist");
                     break;
 
             }
         }
-        while (operation != 8) ;
+        while (operation != 10) ;
     }
 }
