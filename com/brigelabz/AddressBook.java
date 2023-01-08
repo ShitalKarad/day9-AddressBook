@@ -1,4 +1,7 @@
 package com.brigelabz;
+import jdk.jfr.events.FileReadEvent;
+
+import java.io.*;
 import java.lang.reflect.Array;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -174,7 +177,7 @@ public class AddressBook {
                     Scanner scan= new Scanner(System.in);
                     System.out.println("Enter city name ! ");
                     String countCity = scan.nextLine();
-                   // String giveName = input.next();
+                    // String giveName = input.next();
                     for (String addressBookName : addressBookNames.keySet()) {
                         System.out.println(addressBookName);
                         ArrayList<Contact> contact3 = addressBookNames.get(addressBookName);
@@ -200,10 +203,10 @@ public class AddressBook {
                     Scanner scann = new Scanner(System.in);
                     System.out.println("Enter person name ! ");
                     String sortName = scann.nextLine();
-                   // String name = input.next();
+                    // String name = input.next();
                     List<Contact>   personList1 = null;
                     for (String addressBook : addressBookNames.keySet()) {
-                         personList1 = contactList.stream().sorted(Comparator.comparing
+                        personList1 = contactList.stream().sorted(Comparator.comparing
                                 (Contact::getName))
                                 .collect(Collectors.toList());
                     }
@@ -257,5 +260,31 @@ public class AddressBook {
             }
         }
         while (operation != 10) ;
+    }
+
+    public void writeAddressBookFile(HashMap<String,ArrayList<Contact>> addressBookNames) throws FileNotFoundException {
+        PrintWriter printWriter = new PrintWriter("F:/Bridelabz/myAddressBook/myAddressBook.txt");
+        for (String addressBook : addressBookNames.keySet()){
+            for (Contact contactArrayList : addressBookNames.get(addressBook) ){
+                printWriter.append(contactArrayList.toString());
+                //System.out.println(contactArrayList.toString());
+            }
+        }
+        printWriter.flush();
+        printWriter.close();
+        System.out.println("Your file is successfully write");
+
+    }
+    public void readAddressBookFile() throws IOException {
+        FileReader fileReader = new FileReader("F:/Bridelabz/myAddressBook/myAddressBook.txt");
+        BufferedReader bufferedReader=new BufferedReader(fileReader);
+        int i ;
+         while((i=bufferedReader.read())!=-1){
+            System.out.print((char)i);
+        }
+         bufferedReader.close();
+         fileReader.close();
+        System.out.println("Your file is successfully read");
+
     }
 }

@@ -1,12 +1,14 @@
 package com.brigelabz;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class AddressBookMain {
     static HashMap<String,AddressBook> addressBookMap=new HashMap<>();
     static HashMap<String,ArrayList<Contact>> addressBookNames= new HashMap<String,ArrayList<Contact>>();
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         AddressBook familyBook = new AddressBook();
         System.out.println("Welcome in AddressBook system");
         Scanner scanner = new Scanner(System.in);
@@ -79,6 +81,9 @@ public class AddressBookMain {
             }
         } while (operation != 7);
         familyBook.addAddressBookMap(familyBook);
+        System.out.println("Before writing our file ");
+        familyBook.writeAddressBookFile(addressBookNames);
+        familyBook.readAddressBookFile();
 
     }
 }
