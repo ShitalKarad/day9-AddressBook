@@ -114,17 +114,27 @@ public class Contact {
         return Objects.hash(name, surName, address, city, state, contactNumber, zip, gmail);
     }
 
+    //    @Override
+//    public String toString() {
+//        return "Contact{" +
+//                "name='" + name + '\'' +
+//                ", surName='" + surName + '\'' +
+//                ", address='" + address + '\'' +
+//                ", city='" + city + '\'' +
+//                ", state='" + state + '\'' +
+//                ", contactNumber='" + contactNumber + '\'' +
+//                ", zip='" + zip + '\'' +
+//                ", gmail='" + gmail + '\'' +
+//                '}';
+//    }
     @Override
     public String toString() {
-        return "Contact{" +
-                "name='" + name + '\'' +
-                ", surName='" + surName + '\'' +
-                ", address='" + address + '\'' +
-                ", city='" + city + '\'' +
-                ", state='" + state + '\'' +
-                ", contactNumber='" + contactNumber + '\'' +
-                ", zip='" + zip + '\'' +
-                ", gmail='" + gmail + '\'' +
-                '}';
+        return  name + " " +
+                surName + " " +
+                address + " " +
+                city + " " +
+                state + " " +
+                contactNumber + " " +
+                zip  ;
     }
 }
